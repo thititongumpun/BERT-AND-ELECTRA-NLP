@@ -1,5 +1,6 @@
 from transformers import pipeline
 import streamlit as st
+import time
 
 model_name = "deepset/electra-base-squad2"
 electra = pipeline('question-answering',
@@ -8,11 +9,15 @@ electra = pipeline('question-answering',
 )
 
 class generateQA:
+  qa = []
+
   def __init__(self, question, context):
     self.question = question
     self.context = context
+
 qa = []
-qa.append(generateQA('What is my name?', 'My name is Thiti Tongumpun. Im 27  year old. I have no life!'))
+qa.append(generateQA('In what country is Normandy located', 'The Normans (Norman: Nourmands; French; Normands; Latin: Normanni) were the people who in the 10th and 11th \
+                      centuries gave thier name to Normandy a region in France. '))
 qa.append(generateQA('Why is model conversion important?',
         'The option to convert models between FARM and transformers gives freedom to the user and let people easily switch between frameworks.'))
 qa.append(generateQA('The New York Giants and the New York Jets play at which stadium in NYC?',
@@ -20,12 +25,11 @@ qa.append(generateQA('The New York Giants and the New York Jets play at which st
          although both teams play thier home games at MetLife Stadium in nearby East Rutherford, New Jersey, which, hosted Super Bowl XLVIII in 2014.'))
 qa.append(generateQA('When did Beyonce start becoming popular?', 'in the late 1990s' ))
 
-q1 = qa[0]
-q2 = qa[1]
-q3 = qa[2]
-q4 = qa[3]
-
-def init():
+def start():
+  q1 = qa[0]
+  q2 = qa[1]
+  q3 = qa[2]
+  q4 = qa[3]
   st.write('# Question-Answering')
 
   selected = st.selectbox('Question', (
@@ -69,8 +73,9 @@ def init():
       'context': q4.context
     }
     result = electra(q)
-
+  
   st.write(result)
 
 if __name__ == '__main__':
-  init()
+    start()
+  
