@@ -18,12 +18,18 @@ class generateQA:
 qa = []
 qa.append(generateQA('In what country is Normandy located', 'The Normans (Norman: Nourmands; French; Normands; Latin: Normanni) were the people who in the 10th and 11th \
                       centuries gave thier name to Normandy a region in France. '))
-qa.append(generateQA('Why is model conversion important?',
-        'The option to convert models between FARM and transformers gives freedom to the user and let people easily switch between frameworks.'))
 qa.append(generateQA('The New York Giants and the New York Jets play at which stadium in NYC?',
         'The city is represented in National Football League by the New York Giants and the New York Jets, \
          although both teams play thier home games at MetLife Stadium in nearby East Rutherford, New Jersey, which, hosted Super Bowl XLVIII in 2014.'))
 qa.append(generateQA('When did Beyonce start becoming popular?', 'in the late 1990s' ))
+qa.append(generateQA('Why is model conversion important?',
+        'The option to convert models between FARM and transformers gives freedom to the user and let people easily switch between frameworks.'))
+
+def processing():
+  bar = st.progress(0)
+  for percent_complete in range(100):
+    time.sleep(0.05)
+    bar.progress(percent_complete + 1)
 
 q1 = qa[0]
 q2 = qa[1]
@@ -48,34 +54,39 @@ elif (selected == qa[2].question):
 elif (selected == qa[3].question):
   st.write(qa[3].context)
 
+
+
 def start():
     if (selected == qa[0].question):
       q = {
         'question': q1.question,
         'context': q1.context
       }
+      processing()
       result = electra(q)
+      
     elif (selected == qa[1].question):
       q = {
         'question': q2.question,
         'context': q2.context
       }
+      processing()
       result = electra(q)
     elif (selected == qa[2].question):
       q = {
         'question': q3.question,
         'context': q3.context
       }
+      processing()
       result = electra(q)
     elif (selected == qa[3].question):
       q = {
         'question': q4.question,
         'context': q4.context
       }
+      processing()
       result = electra(q)
-    
     st.write(result)
 
 if __name__ == '__main__':
     start()
-  
