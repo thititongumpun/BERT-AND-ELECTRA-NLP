@@ -1,5 +1,5 @@
 #!bin/bash
 echo 'activate env'
-.\\venv\\Scripts\\Activate.ps1
+source venv/Scripts/activate
 echo 'starting ....'
 streamlit run .\\QAELECTRA.py
